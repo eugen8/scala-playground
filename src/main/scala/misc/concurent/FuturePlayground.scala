@@ -1,15 +1,15 @@
 package misc.concurent
 
+import java.util.concurrent.TimeoutException
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.language.postfixOps
 
 object FuturePlayground extends App {
 
-  import scala.concurrent.Future
-
   import scala.concurrent.ExecutionContext.Implicits.global
-  import scala.concurrent.blocking
+  import scala.concurrent.{Future, blocking}
 
   def someFuture(): Future[String] = {
     println("Starting someFuture")
@@ -43,12 +43,19 @@ object FuturePlayground extends App {
       }
     }
 
-    f1.flatMap(resF1 => f2.map(resF2 => resF1 +" - "+resF2))
+    f1.flatMap(resF1 => f2.map(resF2 => resF1 + " - " + resF2))
   }
 
   val f = someFuture()
   println(f)
-  Await.result(f, 2000  millis)
+
+  try {
+    Await.result(f, 490 millis) //450 will likely fail and 490 likely succeed, and blocking won't matter much
+  } catch {
+    case e: TimeoutException => System.err.println("Timeout! " + e.getLocalizedMessage)
+  } finally {
+    println("The future is here!")
+  }
   println(f)
 
 }

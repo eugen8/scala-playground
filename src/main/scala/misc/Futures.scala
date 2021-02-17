@@ -5,13 +5,8 @@ import scala.util.{Failure, Success}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-
-
-
-object Futures extends App{
-
+object Futures extends App {
   andThen()
-
 
   private def andThen() = {
 
