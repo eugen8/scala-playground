@@ -17,7 +17,5 @@ object Cases extends App {
 
   matcherHighToLow(new Human())//matched Creature
   matcherLowToHigh(new Human)//matched Human !!! - that's the correct order to match subtype first
-
-
-
 }
+

@@ -50,3 +50,4 @@ object Classes1 extends App {
   println("Is foo7 == foo8? " + (foo7 == foo8)) // This will be true (unlike when the parameter was a function defined with def)
 
 }
+
